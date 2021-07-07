@@ -16,7 +16,8 @@
 ---
 
 ## Description
-
+This project was created to practice using React hooks, useState and useEffect. The app is made with React and some Material UI components. The focus on this project was to practice using
+the React hooks.
 
 #### Technologies
 
@@ -28,6 +29,7 @@
 ---
 
 ## How To Use
+Press play to start the countdown timer. The play button will turn to a pause button if clicked again and the timer will stop. The reset button will reset the timer and states.
 
 #### Installation
 You can download the repo as a zip file or you can fork it as your own repo.
