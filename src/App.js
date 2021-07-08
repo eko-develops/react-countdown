@@ -1,11 +1,13 @@
 import './App.css';
-import { Button, Typography, Container } from '@material-ui/core'
+import { Button, Typography, Container, TextField } from '@material-ui/core'
 import { useState, useEffect } from 'react'
 
 function App() {
 
-  const [seconds, setSeconds] = useState(20); //set the state of seconds on first render
+  const [seconds, setSeconds] = useState(""); //set the state of seconds on first render
   const [isRunning, setIsRunning] = useState(false);  //handles if the timer is running or paused
+
+  const [number, setNumber] = useState(""); //set the state for the initial value of the input field
 
   useEffect( () => {
     console.log('useEffect ran');
@@ -24,7 +26,7 @@ function App() {
       // Initially when the app renders, isRunning will be set to false. When clicking on the start button, isRunning will become true
       // and the useEffect will fire because isRunning is a dependency. From there the callback in setInterval will be called every 1 second.
       // Within that if statement, there is the clean up function that the useEffect hook will remember on next render or when the component is about to be unmounted.
-      // On every fire of the useEffect, the clean up function will be called and clear the interval. Using
+      // On every fire of the useEffect, the clean up function will be called and clear the interval.
 
       //Why use the clean up function?
       // Using the clean up function will allow us to cut down on lines of code and also decrease the amount of state variables we need. If we did not 
@@ -36,23 +38,43 @@ function App() {
 
   //This function handles the reset button
   const handleReset = () => { 
-    setSeconds(20);
+    setSeconds(number);
     setIsRunning(false);
-    console.log('reset completed');
+    console.log("setting seconds to", number);
+    console.log("setting isRunning to", false)
+  }
+
+  const handleStart = () => {
+    setSeconds(number);
+    setIsRunning(true);
+    console.log("setting seconds to", number);
+    console.log("setting isRunning to", true);
+  }
+
+  const handleOnChange = (event) => {
+    setNumber(event.target.value);
+    console.log("number has been set to", event.target.value);
   }
 
   return (
     <div className="App">
       <Container align="center" className="wrapper">
         <Typography variant="h6" >React Countdown Timer</Typography>
-        <Typography className="timer-display">
+        <Typography variant="h3" className="timer-display" >
           {seconds}
           </Typography>
-        <div className="button-wrapper">
 
+          <TextField
+          id="standard-basic"
+          label="Enter a Number"
+          onChange={handleOnChange}
+          />
+
+        <div className="button-wrapper">
+          
           {/* Good React buttons only toggle boolean values. think of buttons like switches */}
           { !isRunning ? 
-          <Button variant="contained" className="start-Button" onClick={ () => { setIsRunning(true)} }>Play</Button> :
+          <Button variant="contained" className="start-Button" onClick={handleStart}>Play</Button> :
           <Button variant="contained" className="pause-Button" onClick={ () => { setIsRunning(false)} }>Pause</Button>
           }
           <Button variant="text" onClick={handleReset} >Reset</Button>
