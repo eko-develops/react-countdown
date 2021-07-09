@@ -1,6 +1,6 @@
 # react-counter
 
-![React Timer Basic](\react-countdown-timer-ss.JPG)
+![React Timer Basic](/react-countdown-timer-ss.JPG)
 
 > This project is a basic countdown timer that uses functional components, useState, and useEffect hooks.
 
